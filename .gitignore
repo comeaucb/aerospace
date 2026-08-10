@@ -216,3 +216,11 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Temporary files
+.back
+.backup
+.temp
+.temporary
+.sav
+.save
