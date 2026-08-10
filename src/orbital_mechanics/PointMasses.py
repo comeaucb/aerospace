@@ -49,8 +49,10 @@ def vector_direction_angle(direction_magnitude: float = 0.0, vector_magnitude: f
     if vector_magnitude == 0.0:
         # Divide by zero check
         return 0.0
+
+    angle = math.acos( direction_magnitude / vector_magnitude )
+
+    if return_degrees == True:
+        return math.degrees( angle )
     else:
-        if return_degrees == True:
-            return math.degrees( math.acos( direction_magnitude / vector_magnitude ) )
-        else:
-            return math.acos( direction_magnitude / vector_magnitude )
+        return angle
