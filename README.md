@@ -5,3 +5,7 @@ implement equations pulled from all my university aerospace books.
 # As Is Use
 You may use this repository if you want. I take no responsibility for that use. 
 Use at your own risk.
+
+# Executing PyTests
+From this directory execute the command:
+pytest
