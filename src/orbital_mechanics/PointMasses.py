@@ -1,4 +1,4 @@
-"""Point Masses
+"""file: PointMasses.py
 This library implements basic functions for point masses.
 """
 
