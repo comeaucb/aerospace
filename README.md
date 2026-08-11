@@ -2,8 +2,10 @@
 This repository is designed as a library of python functions which 
 implement equations pulled from all my university aerospace books.
 
-# Use
-You may use this repository if you want.
+# As Is Use
+You may use this repository if you want. I take no responsibility for that use. 
+Use at your own risk.
 
-It is largely practice for me as I implement equations with associated 
-unit testing to make sure things work.
+# Executing PyTests
+From this directory execute the command:
+pytest
