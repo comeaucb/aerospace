@@ -75,3 +75,32 @@ def compound_present_worth( final: float = 0.0,
     """
 
     return final * pow( 1 + interest_rate, -periods )
+
+
+def compound_compound_amount( payment: float = 0.0,
+                              periods: float = 0.0,
+                              interest_rate: float = 0.0 ) -> float:
+    """
+    Calculate the final value given a recurring payment.
+    Page 113
+
+    Parameters
+    ----------
+    payment : float
+        Value of recurring payment.
+    periods : float
+        Number of compounding periods.
+    interest_rate : float
+        Interest rate in decimal form (e.g., 0.05 for 5%).
+
+    Returns
+    -------
+    float
+        What the final value is.
+    """
+
+    top = pow(1 + interest_rate, periods) - 1
+    if interest_rate != 0.0:
+        return payment * ( top / interest_rate )
+    else:
+        return 0.0

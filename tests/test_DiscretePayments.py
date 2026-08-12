@@ -14,3 +14,6 @@ def test_compound_interest_final():
 
 def test_compound_present_worth():
     assert abs(compound_present_worth( 10, 10, 0.05 ) - 6.139) < 0.01
+
+def test_compound_compound_amount():
+    assert compound_compound_amount(1,10,0) == 0
