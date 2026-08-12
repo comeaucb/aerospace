@@ -17,3 +17,6 @@ def test_compound_present_worth():
 
 def test_compound_compound_amount():
     assert compound_compound_amount(1,10,0) == 0
+
+def test_compound_sinking_fund():
+    assert compound_sinking_fund(0,10,0) == 0

@@ -104,3 +104,32 @@ def compound_compound_amount( payment: float = 0.0,
         return payment * ( top / interest_rate )
     else:
         return 0.0
+
+
+def compound_sinking_fund( final_value: float = 0.0,
+                           periods: float = 0.0,
+                           interest_rate: float = 0.0 ) -> float:
+    """
+    Calculate the recurring payment for a sinking fund.
+    Page 113
+
+    Parameters
+    ----------
+    final_value : float
+        Final value of fund
+    periods : float
+        Number of compounding periods.
+    interest_rate : float
+        Interest rate in decimal form (e.g., 0.05 for 5%).
+
+    Returns
+    -------
+    float
+        What the recurring payment would be.
+    """
+
+    bottom = pow(1 + interest_rate, periods) - 1
+    if bottom != 0.0:
+        return final_value * ( interest_rate / bottom )
+    else:
+        return 0.0
