@@ -11,3 +11,6 @@ def test_compound_interest_final():
     assert compound_interest_final(10,10,0) == 10
     assert compound_interest_final(0,10,10) == 0
     assert abs(compound_interest_final(10,10,0.1) - 25.9) < 0.1
+
+def test_compound_present_worth():
+    assert abs(compound_present_worth( 10, 10, 0.05 ) - 6.139) < 0.01
