@@ -1,5 +1,6 @@
 # file: test_Gases.py
 
+import pytest
 from thermodynamics.gases import *
 
 def test_ideal_gas_solve_for_moles():
@@ -36,3 +37,7 @@ def test_ideal_gas_solve_for_temperature():
     expected_temperature = 273.20
     tolerance = 1e-2
     assert abs(ideal_gas(N=N, V=V, P=P) - expected_temperature) <= tolerance
+
+def test_ideal_gas_invalid_missing_count():
+    with pytest.raises(ValueError):
+        ideal_gas(N=None, T=None, V=1.0, P=101_320)
