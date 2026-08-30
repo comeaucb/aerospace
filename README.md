@@ -9,3 +9,9 @@ Use at your own risk.
 # Executing PyTests
 From this directory execute the command:
 pytest
+
+# Using the functions
+The functions in this repository are largely designed as standalone equations. 
+That means they should be callable from the command line. Here is an example 
+of how you can import them when you start your python interpreter.
+python -i .\src\engineering_economics\DiscretePayments.py

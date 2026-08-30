@@ -2,6 +2,30 @@
 
 import math
 
+def simple_interest_final( principal: float = 0.0,
+                           periods: float = 0.0,
+                           interest_rate: float = 0.0 ):
+    """
+    Calculate the final value after simple interest is applied.
+    Equation 3.2 page 65
+
+    Parameters
+    ----------
+    principal : float
+        Initial account value.
+    periods : float
+        Number of periods.
+    interest_rate : float
+        Interest rate in decimal form (e.g., 0.05 for 5%).
+
+    Returns
+    -------
+    float
+        Final value after compound interest.
+    """
+
+    return principal * ( 1 + interest_rate * periods )
+
 def compound_interest_final(
     principal: float = 0.0,
     periods: float = 0.0,
@@ -26,3 +50,86 @@ def compound_interest_final(
         Final value after compound interest.
     """
     return principal * (1 + interest_rate) ** periods
+
+
+def compound_present_worth( final: float = 0.0, 
+                            periods: float = 0.0, 
+                            interest_rate: float = 0.0 ) -> float:
+    """
+    Compute the principal given the final value of a compound interest problem.
+    Page 113
+
+    Parameters
+    ----------
+    final : float
+        Final account value.
+    periods : float
+        Number of compounding periods.
+    interest_rate : float
+        Interest rate in decimal form (e.g., 0.05 for 5%).
+
+    Returns
+    -------
+    float
+        What the principal was.
+    """
+
+    return final * pow( 1 + interest_rate, -periods )
+
+
+def compound_compound_amount( payment: float = 0.0,
+                              periods: float = 0.0,
+                              interest_rate: float = 0.0 ) -> float:
+    """
+    Calculate the final value given a recurring payment.
+    Page 113
+
+    Parameters
+    ----------
+    payment : float
+        Value of recurring payment.
+    periods : float
+        Number of compounding periods.
+    interest_rate : float
+        Interest rate in decimal form (e.g., 0.05 for 5%).
+
+    Returns
+    -------
+    float
+        What the final value is.
+    """
+
+    top = pow(1 + interest_rate, periods) - 1
+    if interest_rate != 0.0:
+        return payment * ( top / interest_rate )
+    else:
+        return 0.0
+
+
+def compound_sinking_fund( final_value: float = 0.0,
+                           periods: float = 0.0,
+                           interest_rate: float = 0.0 ) -> float:
+    """
+    Calculate the recurring payment for a sinking fund.
+    Page 113
+
+    Parameters
+    ----------
+    final_value : float
+        Final value of fund
+    periods : float
+        Number of compounding periods.
+    interest_rate : float
+        Interest rate in decimal form (e.g., 0.05 for 5%).
+
+    Returns
+    -------
+    float
+        What the recurring payment would be.
+    """
+
+    bottom = pow(1 + interest_rate, periods) - 1
+    if bottom != 0.0:
+        return final_value * ( interest_rate / bottom )
+    else:
+        return 0.0
