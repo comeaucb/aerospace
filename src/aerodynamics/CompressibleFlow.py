@@ -1,4 +1,4 @@
-# filename: compressible_flow.py
+# filename: CompressibleFlow.py
 # Implements equations from Chapter 10: Compressible Flow through Nozzles, 
 # Diffusers, and Wind Tunnels from "Fundamentals of Aerodynamics: 5th Ed" by 
 # John D. Anderson, Jr, Copyright 2011 McGraw Hill
