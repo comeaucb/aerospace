@@ -4,7 +4,7 @@
 # John D. Anderson, Jr, Copyright 2011 McGraw Hill
 
 import numpy as np
-from scipy.optimize import fsolve
+from scipy.optimize import root_scalar
 
 ## @file compressible_flow.py
 #  @brief Implements isentropic nozzle flow relations from Anderson's
@@ -48,10 +48,10 @@ def a_over_astar(gamma: float = 1.4, area_ratio: float = 1.0):
         exponent = (gamma + 1.0) / (gamma - 1.0)
         return term1 * term2**exponent - area_ratio**2
 
-    # Supersonic root (start slightly above Mach 1)
-    Msup = fsolve(relation, 1.01)[0]
+    # Supersonic root: bracket between Mach 1 and Mach 10
+    Msup = root_scalar(relation, bracket=[1.0, 10.0]).root
 
-    # Subsonic root (start well below Mach 1)
-    Msub = fsolve(relation, 0.10)[0]
+    # Subsonic root: bracket between Mach 0 and Mach 1
+    Msub = root_scalar(relation, bracket=[1e-6, 1.0]).root
 
     return Msup, Msub
