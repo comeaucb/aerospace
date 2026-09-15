@@ -2,6 +2,8 @@
 This library implements basic functions for electric circuits.
 """
 
+import math
+
 def PIV( power=None, current=None, voltage=None) -> float:
     """
     P = IV for the missing value.
@@ -83,3 +85,56 @@ def OhmsLaw( voltage=None, current=None, resistance=None ) -> float:
     # If all 3 were provided.
     else:
         raise ValueError("Why did you call this function if you already know all 3?")
+
+def OhmsPowerLaw( power=None, voltage=None, current=None, resistance=None ) -> float:
+    """
+    Ohm's Power Law. P = V²/R = I²R for the missing value.
+    Equation 2.16
+
+    Parameters:
+    ----------
+    Power: float
+        Watts
+    Voltage: float
+        Volts
+    Current: float
+        Amperes
+    Resistance: float
+        Ohms
+
+    Returns:
+    -------
+    float
+    """
+
+    # find power
+    if power is None:
+        # If you are wanting power, you must have resistance, 2 options
+        if resistance is None and voltage is None:
+            raise ValueError("To compute P = V²/R, you must provide voltage and resistance.")
+        elif resistance is None and current is None:
+            raise ValueError("To compute P = I²/R, you must provide current and resistance.")
+        elif voltage is None: # compute via current
+            return (current * current ) / resistance
+        else: # # compute via voltage
+            return ( voltage * voltage ) / resistance
+
+    # find resistance
+    elif resistance is None:
+        # If you want resistance, you must have power, 2 options.
+        if voltage is None and power is None:
+            raise ValueError("To compute R = V²/P, you must provide voltage and power.")
+        elif current is None and power is None:
+            raise ValueError("To compute R = I²/P, you must provide current and power.")
+        elif current is None: # computer via voltage
+            return (voltage * voltage ) / power
+        else: # compute via current
+            return (current * current) / power
+
+    # compute voltage
+    elif current is None and power is None:
+        return math.sqrt( power * resistance )
+
+    # compute current
+    elif voltage is None and current is None:
+        return math.sqrt( power / resistance )

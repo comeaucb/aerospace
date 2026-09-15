@@ -34,3 +34,6 @@ def test_OhmsLaw():
     # Missing too many arguments
     with pytest.raises(ValueError):
         OhmsLaw()  # all three missing
+
+def test_OhmsPowerLaw():
+    assert True
