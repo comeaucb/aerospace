@@ -86,55 +86,58 @@ def OhmsLaw( voltage=None, current=None, resistance=None ) -> float:
     else:
         raise ValueError("Why did you call this function if you already know all 3?")
 
-def OhmsPowerLaw( power=None, voltage=None, current=None, resistance=None ) -> float:
+def OhmsPowerLaw(power=None, voltage=None, current=None, resistance=None) -> float:
     """
-    Ohm's Power Law. P = V²/R = I²R for the missing value.
-    Equation 2.16
-
-    Parameters:
-    ----------
-    Power: float
-        Watts
-    Voltage: float
-        Volts
-    Current: float
-        Amperes
-    Resistance: float
-        Ohms
-
-    Returns:
-    -------
-    float
+    Ohm's Power Law. Computes the missing value using:
+        P = V^2 / R
+        P = I^2 * R
+        V = sqrt(P * R)
+        I = sqrt(P / R)
+        R = V^2 / P
+        R = P / I^2
     """
 
-    # find power
+    # --- Compute POWER ---
     if power is None:
-        # If you are wanting power, you must have resistance, 2 options
-        if resistance is None and voltage is None:
-            raise ValueError("To compute P = V²/R, you must provide voltage and resistance.")
-        elif resistance is None and current is None:
-            raise ValueError("To compute P = I²/R, you must provide current and resistance.")
-        elif voltage is None: # compute via current
-            return (current * current ) / resistance
-        else: # # compute via voltage
-            return ( voltage * voltage ) / resistance
+        # Need resistance + (voltage or current)
+        if resistance is None:
+            raise ValueError("To compute power, provide resistance and either voltage or current.")
 
-    # find resistance
-    elif resistance is None:
-        # If you want resistance, you must have power, 2 options.
-        if voltage is None and power is None:
-            raise ValueError("To compute R = V²/P, you must provide voltage and power.")
-        elif current is None and power is None:
-            raise ValueError("To compute R = I²/P, you must provide current and power.")
-        elif current is None: # computer via voltage
-            return (voltage * voltage ) / power
-        else: # compute via current
-            return (current * current) / power
+        if voltage is not None:
+            return (voltage * voltage) / resistance
 
-    # compute voltage
-    elif current is None and power is None:
-        return math.sqrt( power * resistance )
+        if current is not None:
+            return (current * current) * resistance
 
-    # compute current
-    elif voltage is None and current is None:
-        return math.sqrt( power / resistance )
+        raise ValueError("To compute power, provide voltage or current.")
+
+    # --- Compute RESISTANCE ---
+    if resistance is None:
+        # Need power + (voltage or current)
+        if power is None:
+            raise ValueError("To compute resistance, provide power and either voltage or current.")
+
+        if voltage is not None:
+            return (voltage * voltage) / power
+
+        if current is not None:
+            return power / (current * current)
+
+        raise ValueError("To compute resistance, provide voltage or current.")
+
+    # --- Compute VOLTAGE ---
+    if voltage is None:
+        # Need power + resistance
+        if power is None or resistance is None:
+            raise ValueError("To compute voltage, provide power and resistance.")
+        return math.sqrt(power * resistance)
+
+    # --- Compute CURRENT ---
+    if current is None:
+        # Need power + resistance
+        if power is None or resistance is None:
+            raise ValueError("To compute current, provide power and resistance.")
+        return math.sqrt(power / resistance)
+
+    # --- If all four provided ---
+    raise ValueError("All four values provided; nothing to compute.")
