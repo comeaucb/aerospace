@@ -1,4 +1,4 @@
-# file: tests-PointMasses.py
+# file: test-DiscretePayments.py
 
 from engineering_economics.DiscretePayments import *
 

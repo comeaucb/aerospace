@@ -1,4 +1,4 @@
-# file: tests-PointMasses.py
+# file: test-PointMasses.py
 
 from orbital_mechanics.PointMasses import *
 
