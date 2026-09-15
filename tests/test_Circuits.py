@@ -24,3 +24,13 @@ def test_PIV():
     # Calling with all three provided
     with pytest.raises(ValueError):
         PIV(power=10.0, current=2.0, voltage=5.0)
+
+
+def test_OhmsLaw():
+    # Tests to show the equations are working.
+    assert 0.018 == OhmsLaw( voltage=9.0, resistance=500 )
+
+    # Tests to show the ValueRaise Errors are working.
+    # Missing too many arguments
+    with pytest.raises(ValueError):
+        OhmsLaw()  # all three missing
